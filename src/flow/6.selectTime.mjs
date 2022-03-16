@@ -1,5 +1,6 @@
 import {JSDOM} from 'jsdom';
 import {lightFormat} from 'date-fns';
+import log from '../log.mjs';
 
 async function sendTime(send, numberOfPeople, selectedTime){
   const {sectionId, fromDateTime, serviceTypeId} = selectedTime;
@@ -24,7 +25,7 @@ async function sendTime(send, numberOfPeople, selectedTime){
 
 export async function selectTime(send, numberOfPeople, availableTimes){
   // Select Time
-  console.log('### Select Time');
+  log('### Select Time');
   let res4;
   let succefulTime;
   for(const timeToTry of availableTimes){
@@ -39,9 +40,9 @@ export async function selectTime(send, numberOfPeople, availableTimes){
       throw error;
     }
   }
-  console.log(succefulTime);
+  log(succefulTime);
   const dom4 = new JSDOM(res4.body);
-  console.log('H1:', dom4.window.document.querySelector('h1').textContent);
+  log('H1:', dom4.window.document.querySelector('h1').textContent);
   return succefulTime;
 }
 

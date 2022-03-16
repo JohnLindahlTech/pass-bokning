@@ -1,8 +1,9 @@
 import {JSDOM} from 'jsdom';
+import log from '../log.mjs';
 
 export async function initForm(post, serviceGroupId){
   // Boka tid
-  console.log('### InitForm');
+  log('### InitForm');
 
   if(!serviceGroupId){
     throw new Error('Missing serviceGroupId')
@@ -15,7 +16,7 @@ export async function initForm(post, serviceGroupId){
   });
 
   const dom2 = new JSDOM(res2.body);
-  console.log('H1:', dom2.window.document.querySelector('h1').textContent);
+  log('H1:', dom2.window.document.querySelector('h1').textContent);
 }
 
 export default initForm;

@@ -13,6 +13,7 @@ import personDetails from './flow/7.personDetails.mjs';
 import importantInfo from './flow/8.importantInfo.mjs';
 import contactInfo from './flow/9.kontaktInfo.mjs';
 import confirm from './flow/10.confirm.mjs';
+import log from './log.mjs';
 
 const livingInSwedenCategory = 2;
 
@@ -40,14 +41,14 @@ function createPost(client, endpoint){
       form,
     });
   
-    console.log(`POST: ${post.statusCode} - ${post.headers.location}`);
+    log(`POST: ${post.statusCode} - ${post.headers.location}`);
     if(post.statusCode !== 302){
       const error = new Error('Post was not a redirect');
       error.statusCode = 418; // Does not matter
       throw error;
     }
     const res = await client.get(post.headers.location.replace(/^\//, ''));
-    console.log(`GET: ${res.statusCode} - ${res.headers.location}`);
+    log(`GET: ${res.statusCode} - ${res.headers.location}`);
     return res;
   }
 }
@@ -56,7 +57,7 @@ function createPost(client, endpoint){
 async function main(){
   const config = await readConfig();
   const {persons, contact, station, county, endDate, } = config;
-  console.log(config);
+  log(config);
   const cookieJar = new CookieJar();
   const client = got.extend({
     prefixUrl: domain,
@@ -77,7 +78,7 @@ async function main(){
   try{
     const successFile = await readSuccess();
     if(successFile?.result?.bookingNumber){
-      console.log('Already done, nothing to do here!');
+      log('Already done, nothing to do here!');
       exit(0);
     }
   } catch(e){
@@ -86,7 +87,7 @@ async function main(){
     }
     // File does not exist, which is fine, lets continue.
   }
-  console.log('No previous successfile, lets do this!')
+  log('No previous successfile, lets do this!')
   await start(client, startpoint);
   // await delay(3000);
   await initForm(post, serviceGroupIds[county.toLowerCase()])
@@ -116,4 +117,4 @@ async function main(){
   writeSuccess({result, contact, persons, startDate, station, endDate, county, foundDate: foundValidDate });
 }
 
-main().then(console.log, console.error);
+main().then(log, console.error);

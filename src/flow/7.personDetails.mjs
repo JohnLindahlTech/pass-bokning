@@ -1,7 +1,8 @@
 import {JSDOM} from 'jsdom';
+import log from '../log.mjs';
 
 export async function personDetails(send, persons, county){
-  console.log('### person details');
+  log('### person details');
 
   const services = {
     'uppsala':{
@@ -44,7 +45,7 @@ export async function personDetails(send, persons, county){
   const res4 = await send(boendeForm);
 
   const dom4 = new JSDOM(res4.body);
-  console.log('H1:', dom4.window.document.querySelector('h1').textContent);
+  log('H1:', dom4.window.document.querySelector('h1').textContent);
 }
 
 export default personDetails;

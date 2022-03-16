@@ -1,4 +1,5 @@
 import {JSDOM} from 'jsdom';
+import log from '../log.mjs';
 
 export function findBookingInfo(dom){
   const bookingNumber = dom.window.document.querySelector('label[for=BookingNumber] + div').textContent.trim();
@@ -16,7 +17,7 @@ export function findBookingInfo(dom){
 }
 
 export async function confirm(post, persons){
-  console.log('### Confirm booking');
+  log('### Confirm booking');
 
   
   const form = persons.map((_, index) => {
@@ -36,7 +37,7 @@ export async function confirm(post, persons){
   const res2 = await post(form);
 
   const dom = new JSDOM(res2.body);
-  console.log('H1:', dom.window.document.querySelector('h1').textContent);
+  log('H1:', dom.window.document.querySelector('h1').textContent);
 
   const result = findBookingInfo(dom);
   return result;

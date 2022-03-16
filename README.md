@@ -36,5 +36,5 @@ Once the script succeeds in creating a booking it will create a file called `res
 # Cron
 To automate this script run with a similar crontab:
 ```
-*/15 * * * * [PATH_TO_NODE_DIR]/node [PATH_TO_REPO]/src/index.mjs
+*/15 * * * * [PATH_TO_NODE_INSTALL]/bin/node [PATH_TO_REPO]/src/index.mjs > [PATH_TO_REPO]/result/log.txt 2>&1
 ```

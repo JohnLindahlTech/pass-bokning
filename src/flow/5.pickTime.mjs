@@ -1,5 +1,6 @@
 import {JSDOM} from 'jsdom';
 import {isAfter, lightFormat, parse} from 'date-fns';
+import log from '../log.mjs';
 
 
 export function findFreeTimes(dom){
@@ -19,7 +20,7 @@ export function findDatePickerDate(dom){
 export async function pickTime(post, numberOfPeople, sectionId, startDate, endDate){
   
   // Välj Tid
-  console.log('### pick time');
+  log('### pick time');
 
   const time = {
     FormId: 1,
@@ -35,7 +36,7 @@ export async function pickTime(post, numberOfPeople, sectionId, startDate, endDa
   const res5 = await post(time);
 
   const dom = new JSDOM(res5.body);
-  console.log('H1:', dom.window.document.querySelector('h1').textContent);
+  log('H1:', dom.window.document.querySelector('h1').textContent);
   const times = findFreeTimes(dom);
   const current = findDatePickerDate(dom);
   if(times.length){
