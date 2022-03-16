@@ -5,7 +5,7 @@ This is a helper script to be able to book a time for Uppsala/Stockholm passport
 
 # Getting started
 Create a file `result/config.json`
-```json
+```js
 {
   "persons":[ // Amount of persons to book for. Feel free to add or remove, add empty objects if you want to be anonymous.
     {
