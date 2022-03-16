@@ -114,6 +114,10 @@ async function main(){
   // await delay(3000);
   const result = await confirm(post, persons);
 
+  console.error('##########################');
+  console.error('##### GREAT SUCCESS! #####');
+  console.error('##########################');
+
   writeSuccess({result, contact, persons, startDate, station, endDate, county, foundDate: foundValidDate });
 }
 
