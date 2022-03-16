@@ -30,7 +30,7 @@ pnpm install # install dependencies
 pnpm run start # runs the command.
 ```
 
-Once the script succeeds in creating a booking it will create a file called `result/success.json` and any time you run the script with that file existing, the script will close with doing anything.
+Once the script succeeds in creating a booking it will create a file called `result/success.json` and any time you run the script with that file existing, the script will close without doing anything.
 
 
 # Cron
