@@ -44,14 +44,3 @@ export async function confirm(post, persons){
 }
 
 export default confirm;
-
-
-// Bokningsnummer:
-// 638193576
-// Tid:
-// 2022-08-18 11:10
-// Passexpedition:
-// Enköping
-// Ärende:
-// Pass/id-kort
-// Antal personer:2
