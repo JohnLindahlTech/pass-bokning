@@ -1,7 +1,8 @@
 # Pass bokning
 This is a helper script to be able to book a time for Uppsala/Stockholm passport time.
 
-# Requirement
+# Requirements
+Nodejs v17
 
 # Getting started
 Create a file `result/config.json`
