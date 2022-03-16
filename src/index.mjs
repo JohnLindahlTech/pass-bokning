@@ -78,7 +78,9 @@ async function main(){
   try{
     const successFile = await readSuccess();
     if(successFile?.result?.bookingNumber){
-      log('Already done, nothing to do here!');
+      console.error('##############################################');
+      console.error('##### You already have a booking, dummy! #####');
+      console.error('##############################################');
       exit(0);
     }
   } catch(e){
