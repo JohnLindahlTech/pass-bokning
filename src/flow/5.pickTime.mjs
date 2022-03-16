@@ -42,6 +42,7 @@ export async function pickTime(post, numberOfPeople, sectionId, startDate, endDa
   if(times.length){
     // We found some times on this page.
     const [first] = times;
+    console.log(first);
     if(isAfter(first.fromDateTime, endDate)){
       // Too late, we do not care anyway, lets stop this.
       return undefined;
