@@ -14,6 +14,7 @@ import importantInfo from './flow/8.importantInfo.mjs';
 import contactInfo from './flow/9.kontaktInfo.mjs';
 import confirm from './flow/10.confirm.mjs';
 import log from './log.mjs';
+import {getServiceGroupIdsForCounty} from './flow/countySpecifics.mjs';
 
 const livingInSwedenCategory = 2;
 
@@ -23,12 +24,6 @@ const domain = 'https://bokapass.nemoq.se';
 const prefix = 'Booking/Booking';
 const index = 'Index';
 const next = 'Next';
-
-const serviceGroupIds = {
-  'uppsala': 20,
-  'stockholm': 47,
-  'vastragotaland': 40
-}
 
 function delay(t, v) {
   return new Promise(function(resolve) { 
@@ -93,7 +88,7 @@ async function main(){
   log('No previous successfile, lets do this!')
   await start(client, startpoint);
   // await delay(3000);
-  await initForm(post, serviceGroupIds[county.toLowerCase()])
+  await initForm(post, getServiceGroupIdsForCounty(county))
   // await delay(3000);
   await approveTOC(post, persons.length);
   // await delay(3000);
@@ -117,9 +112,9 @@ async function main(){
   // await delay(3000);
   const result = await confirm(post, persons);
 
-  console.error('##########################');
-  console.error('##### GREAT SUCCESS! #####');
-  console.error('##########################');
+  console.log('##########################');
+  console.log('##### GREAT SUCCESS! #####');
+  console.log('##########################');
 
   writeSuccess({result, contact, persons, startDate, station, endDate, county, foundDate: foundValidDate });
 }

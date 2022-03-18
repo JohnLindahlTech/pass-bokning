@@ -1,31 +1,11 @@
 import {JSDOM} from 'jsdom';
 import log from '../log.mjs';
+import {getPersonDetailsForCounty} from './countySpecifics.mjs';
 
 export async function personDetails(send, persons, county){
   log('### person details');
 
-  const services = {
-    'uppsala':{
-      serviceId0: 25,
-      serviceText0: 'SERVICE_2_PASSANSÖKANUPPSALA',
-      serviceId1: 24,
-      serviceText1: 'SERVICE_2_ID-KORTUPPSALA',
-    },
-    'stockholm': {
-      serviceId0: 52,
-      serviceText0: 'SERVICE_2_PASSANSÖKANSTOCKHOLMS',
-      serviceId1: 48,
-      serviceText1: 'SERVICE_2_ID-KORTSTOCKHOLMS',
-    },
-    'vastragotaland': {
-      serviceId0: 42,
-      serviceText0: 'SERVICE_2_PASSANSÖKANVÄSTRAGÖTALAND',
-      serviceId1: 41,
-      serviceText1: 'SERVICE_2_ID-KORTVÄSTRAGÖTALAND	',
-    }
-  }
-
-  const service = services[county];
+  const service = getPersonDetailsForCounty(county);
 
   const boendeForm = persons.map((person, index) => {
     const i = {};
