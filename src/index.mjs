@@ -14,7 +14,7 @@ import importantInfo from './flow/8.importantInfo.mjs';
 import contactInfo from './flow/9.kontaktInfo.mjs';
 import confirm from './flow/10.confirm.mjs';
 import log from './log.mjs';
-import {getServiceGroupIdsForCounty} from './flow/countySpecifics.mjs';
+import {getServiceGroupIdsForRegion} from './flow/regionSpecifics.mjs';
 
 const livingInSwedenCategory = 2;
 
@@ -52,7 +52,7 @@ function createPost(client, endpoint){
 
 async function main(){
   const config = await readConfig();
-  const {persons, contact, station, county, endDate, } = config;
+  const {persons, contact, station, region, endDate, } = config;
   log(config);
   const cookieJar = new CookieJar();
   const client = got.extend({
@@ -60,7 +60,7 @@ async function main(){
     followRedirect: false,
     headers: {
       Origin: domain,
-      Referer: `${domain}/${prefix}/${index}/${county}`,
+      Referer: `${domain}/${prefix}/${index}/${region}`,
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
       'User-Agent': ' Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36'
     },
@@ -68,8 +68,8 @@ async function main(){
   })
 
 
-  const startpoint = `${prefix}/${index}/${county}`;
-  const endpoint = `${prefix}/${next}/${county}`;
+  const startpoint = `${prefix}/${index}/${region}`;
+  const endpoint = `${prefix}/${next}/${region}`;
   const post = createPost(client, endpoint);
   try{
     const successFile = await readSuccess();
@@ -88,7 +88,7 @@ async function main(){
   log('No previous successfile, lets do this!')
   await start(client, startpoint);
   // await delay(3000);
-  await initForm(post, getServiceGroupIdsForCounty(county))
+  await initForm(post, getServiceGroupIdsForRegion(region))
   // await delay(3000);
   await approveTOC(post, persons.length);
   // await delay(3000);
@@ -104,7 +104,7 @@ async function main(){
   }
   const foundValidDate = await selectTime(post, persons.length, foundValidDates);
   // await delay(3000);
-  await personDetails(post, persons, county);
+  await personDetails(post, persons, region);
   // await delay(3000);
   await importantInfo(post);
   // await delay(3000);
@@ -116,7 +116,7 @@ async function main(){
   console.log('##### GREAT SUCCESS! #####');
   console.log('##########################');
 
-  writeSuccess({result, contact, persons, startDate, station, endDate, county, foundDate: foundValidDate });
+  writeSuccess({result, contact, persons, startDate, station, endDate, region, foundDate: foundValidDate });
 }
 
 main().then(log, console.error);

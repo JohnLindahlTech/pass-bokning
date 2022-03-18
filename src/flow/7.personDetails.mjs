@@ -1,11 +1,11 @@
 import {JSDOM} from 'jsdom';
 import log from '../log.mjs';
-import {getPersonDetailsForCounty} from './countySpecifics.mjs';
+import {getPersonDetailsForRegion} from './regionSpecifics.mjs';
 
-export async function personDetails(send, persons, county){
+export async function personDetails(send, persons, region){
   log('### person details');
 
-  const service = getPersonDetailsForCounty(county);
+  const service = getPersonDetailsForRegion(region);
 
   const boendeForm = persons.map((person, index) => {
     const i = {};
