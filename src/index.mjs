@@ -44,7 +44,7 @@ function createPost(client, endpoint){
       throw error;
     }
     const res = await client.get(post.headers.location.replace(/^\//, ''));
-    log(`GET: ${res.statusCode} - ${res.headers.location}`);
+    log(`GET: ${res.statusCode}`);
     return res;
   }
 }
