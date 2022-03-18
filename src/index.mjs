@@ -27,6 +27,7 @@ const next = 'Next';
 const serviceGroupIds = {
   'uppsala': 20,
   'stockholm': 47,
+  'vastragotaland': 40
 }
 
 function delay(t, v) {

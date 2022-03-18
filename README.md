@@ -1,5 +1,5 @@
 # Pass bokning
-This is a helper script to be able to book a time for Uppsala/Stockholm passport time.
+This is a helper script to be able to book a time for Uppsala/Stockholm/Västra Götaland passport time.
 
 # Requirements
 Nodejs v17
@@ -19,7 +19,7 @@ Create a file `result/config.json`
     "phone": "0701234567"
   },
   "station": 0, // 0 = all of the passstations in the county, if you want a specific one you need to check it up.
-  "county": "uppsala", // Allowed/supported: uppsala, stockholm
+  "county": "uppsala", // Allowed/supported: uppsala, stockholm, vastragotaland
   "endDate": "2022-05-31" // How long to allow the automated booking to work
 }
 ```

@@ -16,6 +16,12 @@ export async function personDetails(send, persons, county){
       serviceText0: 'SERVICE_2_PASSANSÖKANSTOCKHOLMS',
       serviceId1: 48,
       serviceText1: 'SERVICE_2_ID-KORTSTOCKHOLMS',
+    },
+    'vastragotaland': {
+      serviceId0: 42,
+      serviceText0: 'SERVICE_2_PASSANSÖKANVÄSTRAGÖTALAND',
+      serviceId1: 41,
+      serviceText1: 'SERVICE_2_ID-KORTVÄSTRAGÖTALAND	',
     }
   }
 
