@@ -1,5 +1,6 @@
 # Pass bokning
-This is a helper script to be able to book a time for Uppsala/Stockholm/Västra Götaland passport time.
+This is a helper script to be able to book a time for ordering a passport in Sweden.
+This script does not currently support ordering National ID.
 
 ## Requirements
 Nodejs v17
@@ -39,10 +40,26 @@ To automate this script run with a similar crontab:
 ```
 
 ## Supported regions:
-* Uppsala (`uppsala`)
-* Stockholm (`stockholm`)
-* Västra Götaland (`vastragotaland`)
+* Blekinge Län (`blekinge`)
+* Dalarna (`dalarna`)
+* Gotland (`gotland`)
+* Gävleborg (`gavleborg`)
+* Halland (`halland`)
+* Jämtland (`jamtland`)
+* Jönköping (`jonkoping`)
+* Kalmar (`kalmar`)
+* Kronoberg (`kronoberg`)
+* Norrbottn (`norrbotten`)
 * Skåne (`skane`)
+* Stockholm (`stockholm`)
+* Södermanland (`sodermanland`)
+* Uppsala (`uppsala`)
+* Värmland (`varmland`)
+* Västerbotten (`vasterbotten`)
+* Västernorrland (`vasternorrland`)
+* Västra Götaland (`vastragotaland`)
+* Örebro (`orebro`)
+* Östergötland (`ostergotland`)
 
 ## How to add region support
 
