@@ -1,6 +1,7 @@
 import jsonfile from 'jsonfile';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import log from '../log.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -21,6 +22,11 @@ export async function readSuccess(){
 }
 
 export async function readConfig(){
-  return jsonfile.readFile(CONFIG_PATH);
+  const file = await jsonfile.readFile(CONFIG_PATH);
+  if(!file.region && file.county){
+    log(`*** WARNING *** you are using the deprecated 'config.county' you should change it to 'config.region' in result/config.json`)
+    file.region = file.county;
+  }
+  return file;
 }
 
