@@ -40,15 +40,18 @@ pnpm run start:watch # Runs continously until it finds a time, with a reasonable
 
 pnpm run start:agressive # Runs continously until it finds a booking and bombards the API very often. Not recommended.
 
-./src/entry.mjs --help # Helper for info on how to run custom settings.
+./src/entry.mjs --help # Helper for info on how to run custom options.
+
+# Start script in watch mode, wait 120 seconds between tries, using custom path for config and custom output for success info.
+./src/entry.mjs --watch --timeout 120 --config $(pwd)/result/custom.json --output $(pwd)/result/custom-success.json
 ```
 
 Once the script succeeds in creating a booking it will create a file called `result/success.json` and any time you run the script with that file existing, the script will close without doing anything.
 
 ## Cron
-To automate this script run with a similar crontab:
+If you do not want to run this script with the watch-mode on manually you can do a cronjob similar to:
 ```
-*/15 * * * * [PATH_TO_NODE_INSTALL]/bin/node [PATH_TO_REPO]/src/index.mjs > [PATH_TO_REPO]/result/log.txt 2>&1
+*/15 * * * * [PATH_TO_REPO]/src/index.mjs > [PATH_TO_REPO]/result/log.txt 2>&1
 ```
 ## Configuration 
 

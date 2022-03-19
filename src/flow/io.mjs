@@ -13,12 +13,12 @@ const SUCCESS_PATH = join(DIR_PATH, SUCCESS_FILE);
 const CONFIG_PATH = join(DIR_PATH, CONFIG_FILE);
 
 
-export async function writeSuccess(result){
-  await jsonfile.writeFile(SUCCESS_PATH, result, {spaces: 2});
+export async function writeSuccess(result, path = SUCCESS_PATH){
+  await jsonfile.writeFile(path, result, {spaces: 2});
 }
 
-export async function readSuccess(){
-  return jsonfile.readFile(SUCCESS_PATH);
+export async function readSuccess(path = SUCCESS_PATH){
+  return jsonfile.readFile(path);
 }
 
 export async function readConfig(path = CONFIG_PATH){

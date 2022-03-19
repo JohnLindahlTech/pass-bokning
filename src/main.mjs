@@ -83,6 +83,5 @@ export async function main(config, debug){
   log('##### GREAT SUCCESS! #####');
   debug('##########################');
 
-  await writeSuccess({result, contact, persons, startDate, station, endDate, region, foundDate: foundValidDate });
-  return true
+  return {result, contact, persons, startDate, station, endDate, region, foundDate: foundValidDate };
 }

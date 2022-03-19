@@ -15,7 +15,7 @@ const args = yargs(hideBin(process.argv))
   })
   .option('timeout',{
     alias: 't',
-    describe: 'How many seconds to wait between tries, defaults to 60',
+    describe: 'How many seconds to wait between tries.',
     type: 'number',
     default: 60,
   })
@@ -28,7 +28,12 @@ const args = yargs(hideBin(process.argv))
   .option('config',{
     alias: 'c',
     type: 'string',
-    describe: 'custom config absolute path'
+    describe: 'custom config absolute path.'
+  })
+  .option('output', {
+    alias: 'o',
+    type: 'string',
+    describe: 'custom success output absolute path.'
   })
   .parse()
 
@@ -44,7 +49,7 @@ function delay(t, v) {
 }
 
 async function watchMain(options, config, debug){
-  let success = false;
+  let success;
 
   while(!success){
     debug('New iteration');
@@ -56,6 +61,7 @@ async function watchMain(options, config, debug){
       await delay(options.timeout * 1000);
     }
   }
+  return success;
 }
 
 
@@ -63,7 +69,7 @@ async function entry(options){
   const debug = createDebug(options.debug);
   log('Starting up')
   try{
-    const successFile = await readSuccess();
+    const successFile = await readSuccess(options.output);
     if(successFile?.result?.bookingNumber){
       debug('##############################################');
       log('##### You already have a booking, dummy! #####');
@@ -81,10 +87,16 @@ async function entry(options){
 
   if(options.watch){
     log(`Running watch mode with ${options.timeout}s timeout between tries.`);
-    return await watchMain(options, config, debug);
+    const result = await watchMain(options, config, debug);
+    if(result){
+      await writeSuccess({...result, options}, options.output);
+    }
   } else {
     log(`Running in single mode.`);
-    return await main(config, debug);
+    const result = await main(config, debug);
+    if(result){
+      await writeSuccess({...result, options}, options.output);
+    }
   }
 }
 
