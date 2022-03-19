@@ -9,7 +9,7 @@ On top of that this script stores the details in the file `result/success.json`.
 As long as a file called `result/success.json` (with a `result.bookingNumber`) exists, this script will never attempt to create another booking.
 
 ## Requirements
-Nodejs v17
+Nodejs v16
 
 ## Quick Start
 Create a file `result/config.json`
@@ -34,6 +34,7 @@ Create a file `result/config.json`
 Run the following commands, to install required dependencies.
 
 ```bash
+nvm use # (Optional) If you have nvm installed, to make sure you are using correct nodejs version.
 corepack enable pnpm # Make sure pnpm exists
 pnpm install # install dependencies
 ```
