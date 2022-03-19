@@ -31,9 +31,16 @@ Create a file `result/config.json`
 }
 ```
 
+Run the following commands, to install required dependencies.
+
 ```bash
 corepack enable pnpm # Make sure pnpm exists
 pnpm install # install dependencies
+```
+
+Then run one of the following commands to execute the script in one of the modes.
+
+```bash
 pnpm run start # runs the command in single mode
 
 pnpm run start:watch # Runs continously until it finds a time, with a reasonable amount of wait between tries.
@@ -53,7 +60,8 @@ If you do not want to run this script with the watch-mode on manually you can do
 ```
 */15 * * * * [PATH_TO_REPO]/src/index.mjs > [PATH_TO_REPO]/result/log.txt 2>&1
 ```
-## Configuration 
+## Configuration
+Create a json file with the below mentioned values to be able to run this script.
 
 ### Supported regions:
 Set the `region` parameter to one of the values in paranthesis.
@@ -110,12 +118,16 @@ You must define every person in the list with `firstname` and `lastname`. See ex
 You must set the `contact` info of the persons who is doing the booking. You must provide `email` address and `phone` number.  
 Note that you will receive booking details both by email and sms.
 
-## How to add region support
+--- 
+## Development
+Documentation below this point is just notes how to help improve this script.
+
+### How to add region support
 
 Add `personDetailsServices` & `serviceGroupIds` to [src/flow/regionSpecifics.mjs](./src/flow/regionSpecifics.mjs) (and make a PR to this repo). Also remembed to update this readme file above.
 
 
-### Find personDetailsServices
+#### Find personDetailsServices
 
 * Open [https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/boka-tid-hitta-passexpedition/](https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/boka-tid-hitta-passexpedition/)
 * Navigate with the link to your region (e.g. [https://bokapass.nemoq.se/Booking/Booking/Index/uppsala](https://bokapass.nemoq.se/Booking/Booking/Index/uppsala))
@@ -125,7 +137,7 @@ Add `personDetailsServices` & `serviceGroupIds` to [src/flow/regionSpecifics.mjs
 * Select the first `[region]` (post) request (with a 302 Status).
 * In the `payload` tab, take note of the `ServiceGroupId` which is the value you need.
 
-### Find serviceGroupIds
+#### Find serviceGroupIds
 * See concepts from above.
 * Navigate the form until you come to the `Uppgifter till bokningen` step.
 * Fill the form for name and booking type.
