@@ -34,7 +34,13 @@ Create a file `result/config.json`
 ```bash
 corepack enable pnpm # Make sure pnpm exists
 pnpm install # install dependencies
-pnpm run start # runs the command.
+pnpm run start # runs the command in single mode
+
+pnpm run start:watch # Runs continously until it finds a time, with a reasonable amount of wait between tries.
+
+pnpm run start:agressive # Runs continously until it finds a booking and bombards the API very often. Not recommended.
+
+./src/entry.mjs --help # Helper for info on how to run custom settings.
 ```
 
 Once the script succeeds in creating a booking it will create a file called `result/success.json` and any time you run the script with that file existing, the script will close without doing anything.

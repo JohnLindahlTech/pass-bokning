@@ -23,9 +23,9 @@ async function sendTime(send, numberOfPeople, selectedTime){
 }
 
 
-export async function selectTime(send, numberOfPeople, availableTimes){
+export async function selectTime(send, numberOfPeople, availableTimes, debug){
   // Select Time
-  log('### Select Time');
+  debug('### Select Time');
   let res4;
   let succefulTime;
   for(const timeToTry of availableTimes){
@@ -40,9 +40,8 @@ export async function selectTime(send, numberOfPeople, availableTimes){
       throw error;
     }
   }
-  log(succefulTime);
-  const dom4 = new JSDOM(res4.body);
-  log('H1:', dom4.window.document.querySelector('h1').textContent);
+  const dom4 = new JSDOM(res4?.body);
+  debug('H1:', dom4.window.document.querySelector('h1').textContent);
   return succefulTime;
 }
 

@@ -21,8 +21,8 @@ export async function readSuccess(){
   return jsonfile.readFile(SUCCESS_PATH);
 }
 
-export async function readConfig(){
-  const file = await jsonfile.readFile(CONFIG_PATH);
+export async function readConfig(path = CONFIG_PATH){
+  const file = await jsonfile.readFile(path);
   if(!file.region && file.county){
     log(`*** WARNING *** you are using the deprecated 'config.county' you should change it to 'config.region' in result/config.json`)
     file.region = file.county;

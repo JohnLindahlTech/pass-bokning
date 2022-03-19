@@ -1,8 +1,8 @@
 import {JSDOM} from 'jsdom';
 import log from '../log.mjs';
 
-export async function contactInfo(post, contact){
-  log('### Contact info');
+export async function contactInfo(post, contact, debug){
+  debug('### Contact info');
 
   const {email, phone} = contact;
 
@@ -35,7 +35,7 @@ export async function contactInfo(post, contact){
   });
 
   const dom2 = new JSDOM(res2.body);
-  log('H1:', dom2.window.document.querySelector('h1').textContent);
+  debug('H1:', dom2.window.document.querySelector('h1').textContent);
 }
 
 export default contactInfo;

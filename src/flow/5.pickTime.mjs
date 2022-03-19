@@ -1,7 +1,8 @@
 import {JSDOM} from 'jsdom';
-import {isAfter, lightFormat, parse} from 'date-fns';
+import {isAfter, lightFormat, formatISO, parse, isEqual} from 'date-fns';
 import log from '../log.mjs';
 
+let previousTime;
 
 export function findFreeTimes(dom){
   const nodes = [...dom.window.document.querySelectorAll('div[data-function=timeTableCell]')]
@@ -17,10 +18,10 @@ export function findDatePickerDate(dom){
   return parse(input.value, 'yyyy-MM-dd', new Date());
 }
 
-export async function pickTime(post, numberOfPeople, sectionId, startDate, endDate){
+export async function pickTime(post, numberOfPeople, sectionId, startDate, endDate, debug){
   
   // Välj Tid
-  log('### pick time');
+  debug('### pick time');
 
   const time = {
     FormId: 1,
@@ -36,13 +37,18 @@ export async function pickTime(post, numberOfPeople, sectionId, startDate, endDa
   const res5 = await post(time);
 
   const dom = new JSDOM(res5.body);
-  log('H1:', dom.window.document.querySelector('h1').textContent);
+  debug('H1:', dom.window.document.querySelector('h1').textContent);
   const times = findFreeTimes(dom);
   const current = findDatePickerDate(dom);
   if(times.length){
     // We found some times on this page.
     const [first] = times;
-    console.log(first);
+    debug(`Next available time: ${formatISO(first.fromDateTime)} @station:${first.sectionId} (ServiceTypeId: ${first.serviceTypeId})`);
+    if(!isEqual(first.fromDateTime, previousTime?.fromDateTime) || previousTime?.sectionId !== first.sectionId){
+      previousTime = first;
+      log(`Next available time: ${formatISO(first.fromDateTime)} @station:${first.sectionId} (ServiceTypeId: ${first.serviceTypeId})`);
+    }
+ 
     if(isAfter(first.fromDateTime, endDate)){
       // Too late, we do not care anyway, lets stop this.
       return undefined;

@@ -1,9 +1,9 @@
 import {JSDOM} from 'jsdom';
 import log from '../log.mjs';
 
-export async function accLivingInSweden(send, pers, livingInSweden){
+export async function accLivingInSweden(send, pers, livingInSweden, debug){
   // Bor du i Sverige?
-  log('### Living in sweden');
+  debug('### Living in sweden');
 
   const boendeForm = pers.map((_, index) => {
     const i = {};
@@ -15,7 +15,7 @@ export async function accLivingInSweden(send, pers, livingInSweden){
   const res4 = await send(boendeForm);
 
   const dom4 = new JSDOM(res4.body);
-  log('H1:', dom4.window.document.querySelector('h1').textContent);
+  debug('H1:', dom4.window.document.querySelector('h1').textContent);
 }
 
 export default accLivingInSweden;

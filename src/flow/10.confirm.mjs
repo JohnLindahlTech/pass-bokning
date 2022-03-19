@@ -16,8 +16,8 @@ export function findBookingInfo(dom){
   }
 }
 
-export async function confirm(post, persons){
-  log('### Confirm booking');
+export async function confirm(post, persons, debug){
+  debug('### Confirm booking');
 
   
   const form = persons.map((_, index) => {
@@ -37,7 +37,7 @@ export async function confirm(post, persons){
   const res2 = await post(form);
 
   const dom = new JSDOM(res2.body);
-  log('H1:', dom.window.document.querySelector('h1').textContent);
+  debug('H1:', dom.window.document.querySelector('h1').textContent);
 
   const result = findBookingInfo(dom);
   return result;
