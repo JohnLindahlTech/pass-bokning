@@ -11,7 +11,7 @@ As long as a file called `result/success.json` (with a `result.bookingNumber`) e
 ## Requirements
 Nodejs v17
 
-## Getting started
+## Quick Start
 Create a file `result/config.json`
 ```js
 {
@@ -55,11 +55,8 @@ pnpm run start:agressive # Runs continously until it finds a booking and bombard
 
 Once the script succeeds in creating a booking it will create a file called `result/success.json` and any time you run the script with that file existing, the script will close without doing anything.
 
-## Cron
-If you do not want to run this script with the watch-mode on manually you can do a cronjob similar to:
-```
-*/15 * * * * [PATH_TO_REPO]/src/index.mjs > [PATH_TO_REPO]/result/log.txt 2>&1
-```
+---
+
 ## Configuration
 Create a json file with the below mentioned values to be able to run this script.
 
@@ -119,6 +116,15 @@ You must set the `contact` info of the persons who is doing the booking. You mus
 Note that you will receive booking details both by email and sms.
 
 --- 
+
+## Cron
+If you do not want to run this script with the watch-mode on manually you can do a cronjob similar to:
+```
+*/15 * * * * [PATH_TO_REPO]/src/index.mjs > [PATH_TO_REPO]/result/log.txt 2>&1
+```
+
+---
+
 ## Development
 Documentation below this point is just notes how to help improve this script.
 
