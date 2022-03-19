@@ -1,4 +1,4 @@
-# Pass bokning
+# Passbokning
 This is a helper script to be able to book a time for ordering a passport in Sweden.
 
 ***Note: This script does not currently support ordering National ID, or persons living abroad.***
