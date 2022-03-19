@@ -1,6 +1,12 @@
 # Pass bokning
 This is a helper script to be able to book a time for ordering a passport in Sweden.
-This script does not currently support ordering National ID.
+
+***Note: This script does not currently support ordering National ID, or persons living abroad.***
+
+After a successful booking you will receive the booking details both by email and sms from the police.
+On top of that this script stores the details in the file `result/success.json`.
+
+As long as a file called `result/success.json` (with a `result.bookingNumber`) exists, this script will never attempt to create another booking.
 
 ## Requirements
 Nodejs v17
@@ -38,8 +44,10 @@ To automate this script run with a similar crontab:
 ```
 */15 * * * * [PATH_TO_NODE_INSTALL]/bin/node [PATH_TO_REPO]/src/index.mjs > [PATH_TO_REPO]/result/log.txt 2>&1
 ```
+## Configuration 
 
-## Supported regions:
+### Supported regions:
+Set the `region` parameter to one of the values in paranthesis.
 * Blekinge Län (`blekinge`)
 * Dalarna (`dalarna`)
 * Gotland (`gotland`)
@@ -60,6 +68,38 @@ To automate this script run with a similar crontab:
 * Västra Götaland (`vastragotaland`)
 * Örebro (`orebro`)
 * Östergötland (`ostergotland`)
+
+### Station Id
+Set the `station` paramater to either `0`, to allow any station in your region, or a specific station id.  
+The station id can be found as below:
+
+* Open [https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/boka-tid-hitta-passexpedition/](https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/boka-tid-hitta-passexpedition/)
+* Navigate with the link to your region (e.g. [https://bokapass.nemoq.se/Booking/Booking/Index/uppsala](https://bokapass.nemoq.se/Booking/Booking/Index/uppsala))
+* Open Networktab in dev tools (`ctrl/cmd`+`shift`+`I`), tick `Preserve Log`.
+* (Optional:) Filter for `Doc`.
+* Fill out the form until you come to the page to choose a time.
+* Select your preferred station (`Passexpedition`).
+* (Optional:) Clear requests history in the dev tools network tab.
+* Press either `Sök tid` or `Första Lediga tid`
+* Select the latest post request (`[region]`, status 302).
+* Select the `payload` tab, take note of `SectionId`, which is your station id.
+* In your config (`result/config.json`) set `"station": <your SectionId>`.
+
+### End date
+You must always provide an `endDate`, feel free to set it a couple of years into the future if this does not apply to you.
+
+This script is intended to try to find a time as soon as possible, and if you already have booked a trip abroad or so feel free to limit the search to set a max date that you are interested in a reasonable amount of time before the trip.
+
+> Format: `yyy-mm-dd`
+
+
+### Persons
+Provide `persons` as an list of all the people you want to book a passport for at the same time.
+You must define every person in the list with `firstname` and `lastname`. See example above.
+
+### Contact information
+You must set the `contact` info of the persons who is doing the booking. You must provide `email` address and `phone` number.  
+Note that you will receive booking details both by email and sms.
 
 ## How to add region support
 
@@ -88,3 +128,5 @@ Add `personDetailsServices` & `serviceGroupIds` to [src/flow/regionSpecifics.mjs
   * `Customers[0].Services[0].ServiceTextName` = `serviceText0`
   * `Customers[0].Services[1].ServiceId` = `serviceId1`
   * `Customers[0].Services[1].ServiceTextName` = `serviceText1`
+
+
