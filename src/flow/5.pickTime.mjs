@@ -61,7 +61,7 @@ export async function pickTime(post, numberOfPeople, sectionId, startDate, endDa
     return undefined;
   }
   // This page did not have anything for us, lets continue the search recursively from current viewed date.
-  return pickTime(post, numberOfPeople, sectionId, current, endDate);
+  return pickTime(post, numberOfPeople, sectionId, current, endDate, debug);
 }
 
 export default pickTime;
