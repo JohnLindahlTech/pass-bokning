@@ -38,7 +38,7 @@ function createPost(client, endpoint, debug){
       if(post.body){
         try{
           const dom = new JSDOM(post.body);
-          errorLog(dom.window.document.querySelector('.validation-summary-errors').textContent);
+          errorLog(dom.window.document.querySelector('.validation-summary-errors').textContent, post.statusCode);
         } catch(e){
           errorLog(e);
         }
