@@ -4,7 +4,7 @@ export function log(...args){
   console.log(formatISO(new Date(), ''), ...args);
 }
 
-export function error(...args){
+export function errorLog(...args){
   console.error(formatISO(new Date(), ''), ...args);
 }
 

@@ -12,9 +12,10 @@ import personDetails from './flow/7.personDetails.mjs';
 import importantInfo from './flow/8.importantInfo.mjs';
 import contactInfo from './flow/9.kontaktInfo.mjs';
 import confirm from './flow/10.confirm.mjs';
-import {log, createDebug} from './log.mjs';
+import {log, createDebug, errorLog} from './log.mjs';
 import {getServiceGroupIdsForRegion} from './flow/regionSpecifics.mjs';
 import { writeFilename } from './flow/io.mjs';
+import { JSDOM } from 'jsdom';
 
 const livingInSwedenCategory = 2;
 
@@ -33,10 +34,15 @@ function createPost(client, endpoint, debug){
   
     debug(`POST: ${post.statusCode} - ${post.headers.location}`);
     if(post.statusCode !== 302){
-      const error = new Error('Post was not a redirect');
-      await writeFilename(`error-${lightFormat(new Date(),'yyyy-MM-dd-hh-mm-ss')}.html`, post.body);
-      error.statusCode = 418; // Does not matter
-      throw error;
+      const err = new Error('Post was not a redirect');
+      try{
+        const dom = new JSDOM(post.body);
+        errorLog(dom.window.document.querySelector('.validation-summary-errors').textContent);
+      } catch(e){
+        errorLog(e);
+      }
+      err.statusCode = 418; // Does not matter
+      throw err;
     }
     const res = await client.get(post.headers.location.replace(/^\//, ''));
     debug(`GET: ${res.statusCode}`);

@@ -41,7 +41,7 @@ export async function selectTime(send, numberOfPeople, availableTimes, debug){
     }
   }
   const dom4 = new JSDOM(res4?.body);
-  debug('H1:', dom4.window.document.querySelector('h1').textContent);
+  debug('H1:', dom4.window.document.querySelector('h1')?.textContent);
   return succefulTime;
 }
 
