@@ -8,7 +8,7 @@ export async function importantInfo(post, debug){
   });
 
   const dom2 = new JSDOM(res2.body);
-  debug('H1:', dom2.window.document.querySelector('h1').textContent);
+  debug('H1:', dom2.window.document.querySelector('h1')?.textContent);
 }
 
 export default importantInfo;

@@ -34,3 +34,7 @@ export async function readConfig(path = CONFIG_PATH){
 export async function writeFilename(filename, data){
   return writeFile(join(DIR_PATH, filename), data);
 }
+
+export async function writeErrorHtml(filename, data){
+  return writeFilename(`${filename}-${lightFormat(new Date(),'yyyy-MM-dd-hh-mm-ss')}.html`, data);
+}

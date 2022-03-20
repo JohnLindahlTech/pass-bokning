@@ -1,5 +1,6 @@
 import {JSDOM} from 'jsdom';
-import log from '../log.mjs';
+import log, { errorLog } from '../log.mjs';
+import { writeErrorHtml } from './io.mjs';
 
 export function findBookingInfo(dom){
   const bookingNumber = dom.window.document.querySelector('label[for=BookingNumber] + div').textContent.trim();
@@ -37,10 +38,16 @@ export async function confirm(post, persons, debug){
   const res2 = await post(form);
 
   const dom = new JSDOM(res2.body);
-  debug('H1:', dom.window.document.querySelector('h1').textContent);
+  debug('H1:', dom.window.document.querySelector('h1')?.textContent);
+  try{
+    const result = findBookingInfo(dom);
+    return result;
+  } catch (e){
+    errorLog(`Could not confirm booking, something is wrong with the response.`)
+    await writeErrorHtml(`confirm-error`, res2.body);
+    throw e;
+  }
 
-  const result = findBookingInfo(dom);
-  return result;
 
 }
 

@@ -37,7 +37,7 @@ export async function pickTime(post, numberOfPeople, sectionId, startDate, endDa
   const res5 = await post(time);
 
   const dom = new JSDOM(res5.body);
-  debug('H1:', dom.window.document.querySelector('h1').textContent);
+  debug('H1:', dom.window.document.querySelector('h1')?.textContent);
   const times = findFreeTimes(dom);
   const current = findDatePickerDate(dom);
   if(times.length){

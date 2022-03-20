@@ -12,7 +12,7 @@ export async function approveTOC(post, numberOfPeople, debug){
     Next: 'Nästa'
   });
   const dom3 = new JSDOM(res3.body);
-  debug('H1:', dom3.window.document.querySelector('h1').textContent);
+  debug('H1:', dom3.window.document.querySelector('h1')?.textContent);
 }
 
 export default approveTOC;

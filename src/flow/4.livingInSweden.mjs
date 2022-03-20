@@ -15,7 +15,7 @@ export async function accLivingInSweden(send, pers, livingInSweden, debug){
   const res4 = await send(boendeForm);
 
   const dom4 = new JSDOM(res4.body);
-  debug('H1:', dom4.window.document.querySelector('h1').textContent);
+  debug('H1:', dom4.window.document.querySelector('h1')?.textContent);
 }
 
 export default accLivingInSweden;
