@@ -35,11 +35,13 @@ function createPost(client, endpoint, debug){
     debug(`POST: ${post.statusCode} - ${post.headers.location}`);
     if(post.statusCode !== 302){
       const err = new Error('Post was not a redirect');
-      try{
-        const dom = new JSDOM(post.body);
-        errorLog(dom.window.document.querySelector('.validation-summary-errors').textContent);
-      } catch(e){
-        errorLog(e);
+      if(post.body){
+        try{
+          const dom = new JSDOM(post.body);
+          errorLog(dom.window.document.querySelector('.validation-summary-errors').textContent);
+        } catch(e){
+          errorLog(e);
+        }
       }
       err.statusCode = 418; // Does not matter
       throw err;
