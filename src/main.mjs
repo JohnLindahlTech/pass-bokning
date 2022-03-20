@@ -34,7 +34,7 @@ function createPost(client, endpoint, debug){
     debug(`POST: ${post.statusCode} - ${post.headers.location}`);
     if(post.statusCode !== 302){
       const error = new Error('Post was not a redirect');
-      await writeFilename(`error-${lightFormat(new Date(),'yyyy-MM-dd-hh-mm-ss')}.html`, port.body);
+      await writeFilename(`error-${lightFormat(new Date(),'yyyy-MM-dd-hh-mm-ss')}.html`, post.body);
       error.statusCode = 418; // Does not matter
       throw error;
     }
