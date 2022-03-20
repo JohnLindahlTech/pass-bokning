@@ -3,6 +3,7 @@ import {writeFile} from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import log from '../log.mjs';
+import { lightFormat } from 'date-fns';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
