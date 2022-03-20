@@ -1,6 +1,6 @@
 import got from 'got';
 import {CookieJar} from 'tough-cookie';
-import { startOfTomorrow } from 'date-fns';
+import { lightFormat, startOfTomorrow } from 'date-fns';
 import start from './flow/1.start.mjs';
 import initForm from './flow/2.initForm.mjs';
 import approveTOC from './flow/3.approveToC.mjs';
@@ -14,6 +14,7 @@ import contactInfo from './flow/9.kontaktInfo.mjs';
 import confirm from './flow/10.confirm.mjs';
 import {log, createDebug} from './log.mjs';
 import {getServiceGroupIdsForRegion} from './flow/regionSpecifics.mjs';
+import { writeFilename } from './flow/io.mjs';
 
 const livingInSwedenCategory = 2;
 
@@ -33,6 +34,7 @@ function createPost(client, endpoint, debug){
     debug(`POST: ${post.statusCode} - ${post.headers.location}`);
     if(post.statusCode !== 302){
       const error = new Error('Post was not a redirect');
+      await writeFilename(`error-${lightFormat(new Date(),'yyyy-MM-dd-hh-mm-ss')}.html`, port.body);
       error.statusCode = 418; // Does not matter
       throw error;
     }

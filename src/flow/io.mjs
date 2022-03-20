@@ -1,4 +1,5 @@
 import jsonfile from 'jsonfile';
+import {writeFile} from 'fs/promises';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import log from '../log.mjs';
@@ -30,3 +31,6 @@ export async function readConfig(path = CONFIG_PATH){
   return file;
 }
 
+export async function writeFilename(filename, data){
+  return writeFile(join(DIR_PATH, filename), data);
+}
