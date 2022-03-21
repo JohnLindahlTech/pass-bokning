@@ -114,6 +114,9 @@ This script is intended to try to find a time as soon as possible, and if you al
 > Format: `yyy-mm-dd`
 
 ### Offset start
+
+> WARNING! Not properly tested, as it is hard to get same-day bookings.
+ 
 Use the `offsetStart` if you do need a couple of days to be able to plan.
 If you set the value to `0` (default) same day bookings are allowed. `1` would mean that you can book 1 day after the execution of the script.
 
