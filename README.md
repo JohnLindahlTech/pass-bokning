@@ -28,7 +28,7 @@ Create a file `result/config.json`
   "station": 0, // 0 = all of the passstations in the region, if you want a specific one you need to check it up.
   "region": "uppsala", // Allowed/supported, see Supported regions below.
   "endDate": "2022-05-31" // How long to allow the automated booking to work
-  "offsetStart": 0, // On which day to allow bookings, 0 = same day, 1 = day after etc
+  "offsetStart": 0, // UNTESTED PROPERLY On which day to allow bookings, 0 = same day, 1 = day after etc
 }
 ```
 
