@@ -1,5 +1,5 @@
 import {JSDOM} from 'jsdom';
-import log, { errorLog } from '../log.mjs';
+import { errorLog } from '../log.mjs';
 import { writeErrorHtml } from './io.mjs';
 
 export function findBookingInfo(dom){

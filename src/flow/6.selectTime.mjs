@@ -1,6 +1,5 @@
 import {JSDOM} from 'jsdom';
 import {lightFormat} from 'date-fns';
-import log from '../log.mjs';
 
 async function sendTime(send, numberOfPeople, selectedTime){
   const {sectionId, fromDateTime, serviceTypeId} = selectedTime;

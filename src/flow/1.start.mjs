@@ -1,5 +1,4 @@
 import {JSDOM} from 'jsdom';
-import log from '../log.mjs';
 
 export async function start(client, endpoint, debug){
   // Startpage för att sätta kaka

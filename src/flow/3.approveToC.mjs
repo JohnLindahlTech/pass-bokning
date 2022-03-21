@@ -1,5 +1,4 @@
 import {JSDOM} from 'jsdom';
-import log from '../log.mjs';
 
 export async function approveTOC(post, numberOfPeople, debug){
   // Dataskyddsinformation

@@ -1,5 +1,4 @@
 import {JSDOM} from 'jsdom';
-import log from '../log.mjs';
 
 export async function accLivingInSweden(send, pers, livingInSweden, debug){
   // Bor du i Sverige?

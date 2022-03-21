@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { isExists } from 'date-fns';
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import {createDebug, log} from './log.mjs';

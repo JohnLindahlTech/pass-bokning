@@ -1,12 +1,11 @@
 import got from 'got';
 import {CookieJar} from 'tough-cookie';
-import { lightFormat, startOfToday, addDays } from 'date-fns';
+import { startOfToday, addDays } from 'date-fns';
 import start from './flow/1.start.mjs';
 import initForm from './flow/2.initForm.mjs';
 import approveTOC from './flow/3.approveToC.mjs';
 import accLivingInSweden from './flow/4.livingInSweden.mjs';
 import pickTime from './flow/5.pickTime.mjs';
-import { readSuccess, writeSuccess, readConfig } from './flow/io.mjs';
 import selectTime from './flow/6.selectTime.mjs';
 import personDetails from './flow/7.personDetails.mjs';
 import importantInfo from './flow/8.importantInfo.mjs';
@@ -14,7 +13,6 @@ import contactInfo from './flow/9.kontaktInfo.mjs';
 import confirm from './flow/10.confirm.mjs';
 import {log, createDebug, errorLog} from './log.mjs';
 import {getServiceGroupIdsForRegion} from './flow/regionSpecifics.mjs';
-import { writeFilename } from './flow/io.mjs';
 import { JSDOM } from 'jsdom';
 
 const livingInSwedenCategory = 2;
