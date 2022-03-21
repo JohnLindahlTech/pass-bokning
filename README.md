@@ -28,6 +28,7 @@ Create a file `result/config.json`
   "station": 0, // 0 = all of the passstations in the region, if you want a specific one you need to check it up.
   "region": "uppsala", // Allowed/supported, see Supported regions below.
   "endDate": "2022-05-31" // How long to allow the automated booking to work
+  "offsetStart": 0, // On which day to allow bookings, 0 = same day, 1 = day after etc
 }
 ```
 
@@ -107,6 +108,9 @@ This script is intended to try to find a time as soon as possible, and if you al
 
 > Format: `yyy-mm-dd`
 
+### Offset start
+Use the `offsetStart` if you do need a couple of days to be able to plan.
+If you set the value to `0` (default) same day bookings are allowed. `1` would mean that you can book 1 day after the execution of the script.
 
 ### Persons
 Provide `persons` as an list of all the people you want to book a passport for at the same time.

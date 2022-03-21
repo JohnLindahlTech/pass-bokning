@@ -1,6 +1,6 @@
 import got from 'got';
 import {CookieJar} from 'tough-cookie';
-import { lightFormat, startOfTomorrow } from 'date-fns';
+import { lightFormat, startOfToday, addDays } from 'date-fns';
 import start from './flow/1.start.mjs';
 import initForm from './flow/2.initForm.mjs';
 import approveTOC from './flow/3.approveToC.mjs';
@@ -18,8 +18,6 @@ import { writeFilename } from './flow/io.mjs';
 import { JSDOM } from 'jsdom';
 
 const livingInSwedenCategory = 2;
-
-const startDate = startOfTomorrow();
 
 const domain = 'https://bokapass.nemoq.se';
 const prefix = 'Booking/Booking';
@@ -54,7 +52,8 @@ function createPost(client, endpoint, debug){
 
 
 export async function main(config, debug){
-  const { persons, contact, station, region, endDate } = config;
+  const { persons, contact, station, region, endDate, offsetStart = 0 } = config;
+  const startDate = addDays(startOfToday(), offsetStart)
   const cookieJar = new CookieJar();
   const client = got.extend({
     prefixUrl: domain,
