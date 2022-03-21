@@ -81,6 +81,7 @@ Set the `region` parameter to one of the values in paranthesis.
 * Värmland (`varmland`)
 * Västerbotten (`vasterbotten`)
 * Västernorrland (`vasternorrland`)
+* Västmanland (`vastmanland`)
 * Västra Götaland (`vastragotaland`)
 * Örebro (`orebro`)
 * Östergötland (`ostergotland`)
