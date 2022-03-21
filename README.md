@@ -88,6 +88,10 @@ Set the `region` parameter to one of the values in paranthesis.
 
 ### Station Id
 Set the `station` paramater to either `0`, to allow any station in your region, or a specific station id.  
+All the stations id's can be found over [here](./src/flow/stations.mjs).
+
+#### Full way
+Set the `station` paramater to either `0`, to allow any station in your region, or a specific station id.  
 The station id can be found as below:
 
 * Open [https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/boka-tid-hitta-passexpedition/](https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/boka-tid-hitta-passexpedition/)
