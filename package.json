@@ -7,9 +7,9 @@
   },
   "scripts":{
     "setup": "nvm use; corepack enable pnpm",
-    "start": "./src/entry.mjs",
-    "start:watch": "./src/entry.mjs -w",
-    "start:agressive": "./src/entry.mjs -w -t 1"
+    "start": "sh ./src/entry.mjs",
+    "start:watch": "sh ./src/entry.mjs -w",
+    "start:agressive": "sh ./src/entry.mjs -w -t 1"
   },
   "engines": {
     "node": ">=16",
